@@ -7,7 +7,8 @@ import android.opengl.GLU;
 
 public class MyRenderer implements Renderer {
 
-	Square square = new Square();
+	smoothColoredSquare smoothCSquare= new smoothColoredSquare();
+	flatColoredSquare flatCSquare = new flatColoredSquare();
 	float angle;
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -27,7 +28,7 @@ public class MyRenderer implements Renderer {
 		//Square uno
 		gl.glPushMatrix();
 		gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		square.draw(gl);
+		smoothCSquare.draw(gl);
 		gl.glPopMatrix();
 		
 		//Square dos
@@ -35,7 +36,7 @@ public class MyRenderer implements Renderer {
 		gl.glRotatef(-angle, 0.0f, 0.0f, 1.0f);
 		gl.glTranslatef(2.0f, 0.0f, 0.0f);
 		gl.glScalef(0.5f, 0.5f, 0.5f);
-		square.draw(gl);
+		flatCSquare.draw(gl);
 		gl.glPopMatrix();
 		
 		//Square trés
@@ -44,7 +45,7 @@ public class MyRenderer implements Renderer {
 		gl.glTranslatef(2.0f, 0.0f, 0.0f);
 		gl.glScalef(0.5f, 0.5f, 0.5f);
 		gl.glRotatef(angle*10.0f, 0.0f, 0.0f, 1.0f);
-		square.draw(gl);
+		flatCSquare.draw(gl);
 		gl.glPopMatrix();
 		
 		

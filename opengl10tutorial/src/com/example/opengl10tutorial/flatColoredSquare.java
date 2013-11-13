@@ -7,9 +7,8 @@ import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Square {
-		
-		private float vertices[] = {
+public class flatColoredSquare {
+	private float vertices[] = {
 			-1.0f, 1.0f, 0.0f,	//v0 top left
 			-1.0f, -1.0f, 0.0f,	//v1 bottom left
 			1.0f, -1.0f, 0.0f,	//v2 bottom right
@@ -24,7 +23,7 @@ public class Square {
 	
 	private ShortBuffer indexBuffer;
 	
-	public Square() {
+	public flatColoredSquare() {
 		ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
 		vbb.order(ByteOrder.nativeOrder());
 		vertexBuffer = vbb.asFloatBuffer();
@@ -39,16 +38,19 @@ public class Square {
 	}
 		
 	public void draw(GL10 gl) {
+		gl.glColor4f(0.5f,0.5f,1.0f,1.0f);
+		
 		gl.glFrontFace(GL10.GL_CCW);
 		gl.glEnable(GL10.GL_CULL_FACE);
 		gl.glCullFace(GL10.GL_BACK);
 		
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
+		
 		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length, GL10.GL_UNSIGNED_SHORT, indexBuffer);
 	
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+		
 		gl.glDisable(GL10.GL_CULL_FACE);
 	}
-	
 }
