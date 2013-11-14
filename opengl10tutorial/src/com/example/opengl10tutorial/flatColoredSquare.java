@@ -8,6 +8,17 @@ import java.nio.ShortBuffer;
 import javax.microedition.khronos.opengles.GL10;
 
 public class flatColoredSquare {
+	
+	public void resize(float mult) {
+		for(int i=0; i<vertices.length; i++) {
+			vertices[i] = vertices[i]*mult;
+		}
+		ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
+		vbb.order(ByteOrder.nativeOrder());
+		vertexBuffer = vbb.asFloatBuffer();
+		vertexBuffer.put(vertices);
+		vertexBuffer.position(0);
+	}
 	private float vertices[] = {
 			-1.0f, 1.0f, 0.0f,	//v0 top left
 			-1.0f, -1.0f, 0.0f,	//v1 bottom left
@@ -41,7 +52,7 @@ public class flatColoredSquare {
 		gl.glColor4f(0.5f,0.5f,1.0f,1.0f);
 		
 		gl.glFrontFace(GL10.GL_CCW);
-		gl.glEnable(GL10.GL_CULL_FACE);
+	//	gl.glEnable(GL10.GL_CULL_FACE);
 		gl.glCullFace(GL10.GL_BACK);
 		
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);

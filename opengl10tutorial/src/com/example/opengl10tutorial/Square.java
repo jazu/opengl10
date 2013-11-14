@@ -10,9 +10,9 @@ import javax.microedition.khronos.opengles.GL10;
 public class Square {
 		
 		private float vertices[] = {
-			-1.0f, 1.0f, 0.0f,	//v0 top left
+			-100.0f, 1.0f, 0.0f,	//v0 top left
 			-1.0f, -1.0f, 0.0f,	//v1 bottom left
-			1.0f, -1.0f, 0.0f,	//v2 bottom right
+			100.0f, -1.0f, 0.0f,	//v2 bottom right
 			1.0f, 1.0f, 0.0f,	//v3 top right
 		};
 	

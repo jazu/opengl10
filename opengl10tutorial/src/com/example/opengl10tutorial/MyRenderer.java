@@ -9,7 +9,12 @@ public class MyRenderer implements Renderer {
 
 	smoothColoredSquare smoothCSquare= new smoothColoredSquare();
 	flatColoredSquare flatCSquare = new flatColoredSquare();
-	float angle;
+	float angle=0.0f;
+	float Mxspeed=-8.47f;
+	float Pxspeed=8.47f;
+	float x = 0.0f;
+	float xv = 0.1f;
+	
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		gl.glClearColor(0.9f, 0.5f, 0.0f, 0.8f);
@@ -18,6 +23,8 @@ public class MyRenderer implements Renderer {
 		gl.glEnable(GL10.GL_DEPTH_TEST);
 		gl.glDepthFunc(GL10.GL_LEQUAL);
 		gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);
+		
+		flatCSquare.resize(0.5f); 
 	}
 	
 	public void onDrawFrame(GL10 gl) {
@@ -27,29 +34,17 @@ public class MyRenderer implements Renderer {
 		
 		//Square uno
 		gl.glPushMatrix();
-		gl.glRotatef(angle, 0.0f, 0.0f, 1.0f);
-		smoothCSquare.draw(gl);
-		gl.glPopMatrix();
+		gl.glTranslatef(x, 0.0f, 0.0f);
 		
-		//Square dos
-		gl.glPushMatrix();
-		gl.glRotatef(-angle, 0.0f, 0.0f, 1.0f);
-		gl.glTranslatef(2.0f, 0.0f, 0.0f);
-		gl.glScalef(0.5f, 0.5f, 0.5f);
+		gl.glRotatef(angle, 0.0f, 1.0f, 0.0f);
 		flatCSquare.draw(gl);
 		gl.glPopMatrix();
 		
-		//Square trés
-		gl.glPushMatrix();
-		gl.glRotatef(-angle, 0.0f, 0.0f, 1.0f);
-		gl.glTranslatef(2.0f, 0.0f, 0.0f);
-		gl.glScalef(0.5f, 0.5f, 0.5f);
-		gl.glRotatef(angle*10.0f, 0.0f, 0.0f, 1.0f);
-		flatCSquare.draw(gl);
-		gl.glPopMatrix();
-		
-		
-		angle++;
+		angle += 1.0f;
+		x += xv;
+		if(x >= 8.47f || x <= -8.47) {
+			xv = -xv;		
+		}
 	}
 	
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
